@@ -1,13 +1,14 @@
+import java.io.IOException;
 import java.io.DataInputStream;
 import java.io.FileInputStream;
-import java.io.IOException;
 import java.io.InputStreamReader;
 import java.util.Scanner;
 import java.util.StringTokenizer;
 import java.util.*;
 
 
-public class SquaresCubes {
+public class AntonDigits {
+
     static class Reader {
         final private int BUFFER_SIZE = 1 << 16;
         private DataInputStream din;
@@ -130,19 +131,24 @@ public class SquaresCubes {
             din.close();
         }
     }
-    public static void main(String[] args) throws IOException {
+
+    public static void main(String[] args) throws IOException{
         Reader sc = new Reader();
+
+        long n2 = sc.nextLong();
+        long n3 = sc.nextLong();
+        long n5 = sc.nextLong();
+        long n6 = sc.nextLong();
+
+        //long count = 0;
+        long min256 = Math.min(n2,Math.min(n5,n6));
+
+        n2 -= min256;
+        n5 -= min256;
+        n6 -= min256;
+        //count += min256 * 256;
+        long min32 = Math.min(n2,n3);
         
-        int n = sc.nextInt();
-
-        for(int i = 0; i < n; i++) {
-            countSquaresCubes(sc.nextLong());
-        }
-
-    }
-    private static void countSquaresCubes(long target) {
-        long square = (long) Math.sqrt(target);
-        long cube = (long) Math.cbrt(target);
-        System.out.println(square + cube + 1);
+        System.out.println(min256 * 256 + min32 * 32);
     }
 }
